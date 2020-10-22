@@ -44,21 +44,20 @@ const disableLetterButton = (buttonEl) => {
 // Return `true` if `letter` is in the word.
 //
 const isLetterInWord = (letter) => {
-  const listOfDivs = $('.letter-box');
-
-  for (divElement of listOfDivs) {
-    if ($(divElement).hasClass(letter)) {
-      return true
-    }
-  }
-
+  return $(`div.${letter}`)[0] !== undefined;
 };
-
 
 // Called when `letter` is in word. Update contents of divs with `letter`.
 //
 const handleCorrectGuess = (letter) => {
-  // Replace this with your code
+  numWrong += 1;
+
+  $('#shark-img img').attr('src', `/static/images/guess${numWrong}.png`);
+
+  if (numWrong === 5) {
+    $('button').attr('disabled', true);
+    $('#play-again').css({ display: 'block' });
+  }
 };
 
 // Called when `letter` is not in word.
